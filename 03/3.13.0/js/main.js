@@ -35,14 +35,12 @@ g.append("text")
     .text("Revenue ($)")
 
     d3.csv("data/revenues.csv").then(data => {
-        data.forEach(d => {
-          d.revenue = Number(d.revenue)
-        })
+        data.forEach(d =>  Number(d.revenue))
       
         const x = d3.scaleBand()
           .domain(data.map(d => d.month))
           .range([0, WIDTH])
-          .paddingInner(0.3)
+          .paddingInner(0.2)
           .paddingOuter(0.2)
         
         const y = d3.scaleLinear()
@@ -72,7 +70,7 @@ g.append("text")
         
         rects.enter().append("rect")
           .attr("y", d => y(d.revenue))
-          .attr("x", (d) => x(d.month))
+          .attr("x", d => x(d.month))
           .attr("width", x.bandwidth)
           .attr("height", d => HEIGHT - y(d.revenue))
           .attr("fill", "green")
